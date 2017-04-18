@@ -1,6 +1,12 @@
 /**
- * Created by thram on 18/04/17.
+ * EXERCISE 1:
+ * Using the concepts that you just learned
+ * Create a function that receives a value and
+ * add an element to a list with that value
+ * and render it into the DOM
  */
-const $root = document.getElementById('workshop');
 
-$root.innerHTML = 'Test';
+const $root = document.getElementById('workshop');
+const $list = document.createElement('ul');
+
+$root.appendChild($list);

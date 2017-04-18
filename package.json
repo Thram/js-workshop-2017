@@ -13,7 +13,7 @@
     "lint:test": "eslint __test__ --ext .js",
     "test": "npm run lint && npm run tape -- -p | faucet",
     "test:single": "npm run lint && npm run tape -- --once -p | faucet",
-    "start": "webpack-dev-server --host 0.0.0.0 --port 8080"
+    "start": "webpack-dev-server --host 0.0.0.0 --port 4000"
   },
   "author": "Thram <thramposo@gmail.com> (https://thram.github.io/)",
   "license": "MIT",
