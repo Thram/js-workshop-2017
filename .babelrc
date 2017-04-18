@@ -4,13 +4,16 @@
       "env",
       {
         "targets": {
+          "node": "current",
           "browsers": [
             "last 4 versions",
             "safari >= 7"
           ]
-        }
+        },
+        "useBuiltIns": true
       }
-    ]
+    ],
+    "stage-0"
   ],
   "env": {
     "test": {
