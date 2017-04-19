@@ -1,8 +1,10 @@
 /**
- * EXERCISE 1:
- * Using the data provided:
- * - Retrieve the first value
- * - Create a function that receives an object and add a <li> to $list with the attribute `name`
+ * EXERCISE 2:
+ * List all the items on the file:
+ * - Filter the ones that have no stats
+ * - Separate them by alignment
+ * - Display them in 2 lists with the alignment as Title
+ * - Display the total next to the title in the format "(number)"
  * - Render it into the DOM
  */
 
