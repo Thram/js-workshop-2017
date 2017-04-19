@@ -6,10 +6,12 @@ import dataTypes from './data_types';
 import assignments from './assignments';
 import arrowFunction from './arrow_function';
 import arrays from './arrays';
+import fp from './fp';
 
-variables();
-dataTypes();
-assignments();
-arrowFunction();
-arrays();
+// variables();
+// dataTypes();
+// assignments();
+// arrowFunction();
+// arrays();
+fp();
 
