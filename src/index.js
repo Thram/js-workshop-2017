@@ -1,9 +1,9 @@
 /**
  * EXERCISE 1:
- * Using the concepts that you just learned
- * Create a function that receives a value and
- * add an element to a list with that value
- * and render it into the DOM
+ * Using the data provided:
+ * - Retrieve the first value
+ * - Create a function that receives an object and add a <li> to $list with the attribute `name`
+ * - Render it into the DOM
  */
 
 const $root = document.getElementById('workshop');

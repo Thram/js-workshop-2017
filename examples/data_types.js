@@ -8,12 +8,16 @@ function primitives() {
   console.log('------------');
 
   const string = "I'm a string";
+  const too = 'TOO!';
+  const template = `I'm a string ${too}`;
   const number = 1835;
   const bool = true;
   const notDefined = undefined;
   const noValue = null;
   console.log('String', string);
   console.log('Type String', typeof string);
+  console.log('String Template', template);
+  console.log('Type String Template', typeof template);
   console.log('Number', number);
   console.log('Type Number', typeof number);
   console.log('Boolean', bool);
