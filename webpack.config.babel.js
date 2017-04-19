@@ -8,7 +8,7 @@ const INDEX_HTML_SETUP = {
   title: 'JS Workshop 2017',
   appMountId: 'workshop',
   links: [
-    'https://fonts.googleapis.com/css?family=Roboto',
+    'https://fonts.googleapis.com/css?family=Bangers',
     './src/base.css',
   ],
   meta: [
