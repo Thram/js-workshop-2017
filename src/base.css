@@ -4,7 +4,7 @@
 }
 
 html, body {
-    font-family: 'Bangers', serif;
+    font-family: Bangers, serif;
     width: 100%;
     height: 100%;
     padding: 0;
@@ -18,15 +18,21 @@ html, body {
     height: 100%;
     padding: 1rem;
     overflow: auto;
-    display: flex;
 }
 
 ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    height: 2rem;
+    height: 0;
     overflow: hidden;
+    width: 100%;
+    position: absolute;
+}
+
+ul.open {
+    height: 12rem;
+    overflow: auto;
 }
 
 li {
@@ -39,9 +45,76 @@ li {
     border: 1px solid;
 }
 
+input {
+    width: 100%;
+    border: none;
+    font-family: Bangers, serif;
+    font-size: 1.5rem;
+    outline: none;
+    border-bottom: 1px solid crimson;
+    margin-bottom: .3rem;
+}
+
+.column {
+    flex: 1;
+    padding: 0 1rem;
+}
+
+.group {
+    display: flex;
+}
+
+.select {
+    font-family: Bangers, serif;
+}
+
+.card {
+    background-color: #fff;
+    border: solid 2px #000;
+    box-shadow: 0 6px 6px -6px #000;
+    display: inline-block;
+    flex: 1 1;
+    height: 25rem;
+    margin: 1vmin;
+    overflow: hidden;
+    position: relative;
+}
+
+.name {
+    left: -6px;
+    position: absolute;
+    top: -2px;
+    transform: skew(-15deg);
+    background-image:radial-gradient(circle, yellow, orange);
+}
+
+.real-name {
+    bottom: -2px;
+    position: absolute;
+    right: -6px;
+    transform: skew(-15deg);
+}
+
+.real-name, .name {
+    background-color: #fff;
+    border: solid 2px #000;
+    margin: 0;
+    padding: 3px 10px;
+}
+
 .stats label {
     display: block;
     height: 1rem;
     width: 0;
     background: #32576A;
+}
+
+.portrait {
+    width: 25rem;
+    height: 25rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, .3);
 }
