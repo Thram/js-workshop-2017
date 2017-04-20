@@ -4,8 +4,12 @@
 import { pipe } from './fp';
 import { isEmpty, filterList } from './tools';
 
+export const COLORS = {
+  red: '#E42E45',
+  yellow: '#F8D507',
+  blue: '#32576A',
+};
 
-// Data
 const addToAlignment = (init = [], item) => init.concat(item);
 
 const filterByStats = filterList(item => !isEmpty(item.stats));
@@ -17,3 +21,5 @@ const byAlignment = (data = []) => data.reduce((result, item) => {
 }, {});
 
 export const groupByAlignment = pipe(filterByStats, byAlignment);
+
+export default { groupByAlignment };

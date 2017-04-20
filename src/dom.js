@@ -33,6 +33,8 @@ export default {
   input: createTag('input'),
   image: createTag('img'),
   label: createTag('label'),
-  group: classes => div({ class: `group ${classes}` }),
-  column: classes => div({ class: `column ${classes}` }),
+  span: createTag('span'),
+  button: createTag('button'),
+  group: (classes = '') => div({ class: `group ${classes}` }),
+  column: (classes = '') => div({ class: `column ${classes}` }),
 };

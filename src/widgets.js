@@ -2,6 +2,7 @@
  * Created by thram on 20/04/17.
  */
 import dom from './dom';
+import { COLORS } from './helpers';
 import { filterList } from './tools';
 
 export const selector = (options, events) => {
@@ -27,40 +28,49 @@ export const alignmentColumn = (title, items, onSelect) => {
   return $column;
 };
 
-export const card = (item = {}) => {
+
+export const card = (character = {}) => {
   const $card = dom.div({ class: 'card' });
-  console.log(item);
-  if (item.name) {
+  if (character.name) {
     const $name = dom.title({ class: 'name' });
-    $name.innerHTML = item.name;
+    $name.innerHTML = character.name;
     $card.appendChild($name);
   }
 
-  if (item.realName) {
+  if (character.realName) {
     const $realName = dom.title({ class: 'real-name' });
-    $realName.innerHTML = item.realName;
+    $realName.innerHTML = character.realName;
     $card.appendChild($realName);
   }
 
   const $portrait = dom.div({
     class: 'portrait',
-    style: `background-image: url(${item.portrait})`,
+    style: character.portrait ? `background-image: url(${character.portrait})` : '',
   });
   $card.appendChild($portrait);
 
-  const $stats = dom.div({ class: 'stats' });
-  const $intelligence = dom.label({ class: 'stats' });
-  const $strength = dom.label({ class: 'stats' });
-  const $speed = dom.label({ class: 'stats' });
-  const $durability = dom.label({ class: 'stats' });
-  const $power = dom.label({ class: 'stats' });
-  const $combat = dom.label({ class: 'stats' });
+  const $container = dom.column();
+  $container.appendChild($card);
 
-  $card.appendChild($stats);
+  if (character.stats) {
+    const $statsContainer = dom.div({ class: 'stats' });
+    const stats = ['intelligence', 'strength', 'speed', 'durability', 'power', 'combat'];
 
-  const $column = dom.column();
-  $column.appendChild($card);
-  return $column;
+    stats.forEach((stat) => {
+      const value = character.stats[stat];
+      const $stat = dom.div();
+      const $name = dom.label();
+      const $value = dom.span({ style: `width: ${value}%; background-color: ${COLORS.red};` });
+      $name.innerText = `${stat}: ${value}`;
+      $stat.appendChild($name);
+      $stat.appendChild($value);
+      $statsContainer.appendChild($stat);
+    });
+
+    $container.appendChild($statsContainer);
+  }
+  $container.character = character;
+  return $container;
 };
 
 export default { selector, alignmentColumn, card };
