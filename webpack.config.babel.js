@@ -24,7 +24,7 @@ export default {
   cache: true,
   entry: `${__dirname}/src/index`,
   output: {
-    path: `${__dirname}/dist`,
+    path: `${__dirname}`,
     filename: '[name].js',
   },
   resolve: {
