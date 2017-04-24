@@ -63,137 +63,422 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 /**
- * Created by thram on 20/04/17.
+ * Created by thram on 25/04/17.
  */
-// Tools
-const random = (min = 0, max = 99) => Math.round(((max - min) * Math.random()) + min);
-/* harmony export (immutable) */ __webpack_exports__["e"] = random;
-
-const times = (number, callback) => {
-  for (let i = 0; i < number; i += 1) {
-    callback(i);
-  }
+var random = exports.random = function random() {
+  var min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 99;
+  return Math.round((max - min) * Math.random() + min);
 };
-/* harmony export (immutable) */ __webpack_exports__["f"] = times;
 
-const isEmpty = (obj = {}) => !Object.keys(obj).length;
-/* harmony export (immutable) */ __webpack_exports__["d"] = isEmpty;
+var isEmpty = exports.isEmpty = function isEmpty() {
+  var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return !Object.keys(obj).length;
+};
 
-const forEach = (obj, callback) => (
-  Array.isArray(obj) ?
-    obj.forEach(callback)
-    : Object.keys(obj).forEach(key => callback(obj[key], key))
-);
-/* harmony export (immutable) */ __webpack_exports__["b"] = forEach;
+var forEach = exports.forEach = function forEach(obj, callback) {
+  return Array.isArray(obj) ? obj.forEach(callback) : Object.keys(obj).forEach(function (key) {
+    return callback(obj[key], key);
+  });
+};
 
+var reduce = exports.reduce = function reduce(obj, callback, init) {
+  return Array.isArray(obj) ? obj.reduce(callback, init) : Object.keys(obj).reduce(function (acc, key) {
+    return callback(acc, obj[key], key);
+  }, init);
+};
 
-const filterList = cond => (data = []) => data.reduce((result, item) =>
-  (cond(item, result, data) ? result.concat(item) : result), []);
-/* harmony export (immutable) */ __webpack_exports__["c"] = filterList;
-
-
-const randomItem = (list = []) => () => list[random(0, list.length)];
-/* harmony export (immutable) */ __webpack_exports__["a"] = randomItem;
-
-
+var times = exports.times = function times(number, callback) {
+  return new Array(number).join('.').split('.').map(function (value, index) {
+    return callback(index);
+  });
+};
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tools__ = __webpack_require__(0);
-/**
- * Created by thram on 20/04/17.
- */
 
 
-const $root = document.getElementById('workshop');
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.span = exports.label = exports.button = exports.option = exports.select = exports.img = exports.h2 = exports.h1 = exports.div = undefined;
 
-const setAttr = attr => (el, value) => el.setAttribute(attr, value);
-const setAttrs = (el, attrs) => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__tools__["b" /* forEach */])(attrs, (value, attr) => setAttr(attr)(el, value));
+var _tools = __webpack_require__(0);
 
-const addEvents = (el, events) =>
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__tools__["b" /* forEach */])(events, (callback, event) =>
-    el.addEventListener(event, callback));
-
-const createTag = tag => (attrs = {}, events = {}) => {
-  const $element = document.createElement(tag);
-  setAttrs($element, attrs);
-  addEvents($element, events);
-  return $element;
+var setAttr = function setAttr(attr) {
+  return function (el, value) {
+    return el.setAttribute(attr, value);
+  };
+};
+var setAttrs = function setAttrs(el, attrs) {
+  return (0, _tools.forEach)(attrs, function (value, attr) {
+    return setAttr(attr)(el, value);
+  });
 };
 
-const div = createTag('div');
+var addEvents = function addEvents(el, events) {
+  return (0, _tools.forEach)(events, function (callback, event) {
+    return el.addEventListener(event, callback);
+  });
+};
 
-/* harmony default export */ __webpack_exports__["a"] = ({
-  $root,
-  get: (selector, element) => (element || $root).querySelectorAll(selector),
-  create: createTag,
-  div,
-  bigTitle: createTag('h1'),
-  title: createTag('h2'),
-  select: createTag('select'),
-  option: createTag('option'),
-  input: createTag('input'),
-  image: createTag('img'),
-  label: createTag('label'),
-  span: createTag('span'),
-  button: createTag('button'),
-  group: (classes = '') => div({ class: `group ${classes}` }),
-  column: (classes = '') => div({ class: `column ${classes}` }),
-});
+var createTag = function createTag(tag) {
+  return function () {
+    var attrs = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var events = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+    var $element = document.createElement(tag);
+    setAttrs($element, attrs);
+    addEvents($element, events);
+    return $element;
+  };
+};
+
+var div = exports.div = createTag('div');
+var h1 = exports.h1 = createTag('h1');
+var h2 = exports.h2 = createTag('h2');
+var img = exports.img = createTag('img');
+var select = exports.select = createTag('select');
+var option = exports.option = createTag('option');
+var button = exports.button = createTag('button');
+var label = exports.label = createTag('label');
+var span = exports.span = createTag('span');
+
+exports.default = { div: div, h1: h1, h2: h2, img: img, select: select, option: option, button: button, label: label, span: span };
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fp__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tools__ = __webpack_require__(0);
-/**
- * Created by thram on 19/04/17.
- */
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getRandomCharacter = exports.getCharacter = exports.getCharacters = exports.getAlignments = undefined;
 
-const COLORS = {
-  red: '#E42E45',
-  yellow: '#F8D507',
-  blue: '#32576A',
+var _tools = __webpack_require__(0);
+
+var _data = __webpack_require__(6);
+
+var _data2 = _interopRequireDefault(_data);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var cleanList = _data2.default.filter(function (item) {
+  return !(0, _tools.isEmpty)(item.stats);
+});
+
+var addToAlignment = function addToAlignment() {
+  var init = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var item = arguments[1];
+  return init.concat(item);
 };
-/* harmony export (immutable) */ __webpack_exports__["b"] = COLORS;
 
+var byAlignment = function byAlignment() {
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  return data.reduce(function (result, item) {
+    var alignment = item.biography.alignment;
+    return Object.assign({}, result, _defineProperty({}, alignment, addToAlignment(result[alignment], item)));
+  }, {});
+};
 
-const addToAlignment = (init = [], item) => init.concat(item);
+var getAlignments = exports.getAlignments = function getAlignments() {
+  return byAlignment(cleanList);
+};
 
-const filterByStats = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__tools__["c" /* filterList */])(item => !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__tools__["d" /* isEmpty */])(item.stats));
-
-const byAlignment = (data = []) => data.reduce((result, item) => {
-  const alignment = item.biography.alignment;
-  result[alignment] = addToAlignment(result[alignment], item);
-  return result;
-}, {});
-
-const groupByAlignment = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__fp__["a" /* pipe */])(filterByStats, byAlignment);
-/* harmony export (immutable) */ __webpack_exports__["a"] = groupByAlignment;
-
-
-/* unused harmony default export */ var _unused_webpack_default_export = ({ groupByAlignment });
-
+var getCharacters = exports.getCharacters = function getCharacters() {
+  return Object.assign({}, cleanList);
+};
+var getCharacter = exports.getCharacter = function getCharacter(id) {
+  return cleanList.filter(function (character) {
+    return character.id === id;
+  })[0];
+};
+var getRandomCharacter = exports.getRandomCharacter = function getRandomCharacter() {
+  return cleanList[(0, _tools.random)(0, cleanList.length - 1)];
+};
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fight = exports.throwDice = undefined;
+
+var _tools = __webpack_require__(0);
+
+var BATTLES = 6;
+
+var throwDice = exports.throwDice = function throwDice() {
+  var max = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 100;
+  return (0, _tools.random)(0, max);
+};
+
+var fight = exports.fight = function fight(rivals) {
+  var stats = Object.keys(rivals[0].stats);
+  var totalStats = stats.length;
+
+  var selectStat = function selectStat(rival) {
+    var stat = stats[(0, _tools.random)(0, totalStats - 1)];
+    return { id: rival.id, stat: stat, value: throwDice(rival.stats[stat]) };
+  };
+
+  var battleResult = function battleResult(res, rival) {
+    return rival.value === res.value ? { id: 'draw', value: -1 } : Object.assign({}, res, rival.value > res.value ? rival : {});
+  };
+
+  var matchResult = function matchResult(res, battle) {
+    res[battle.id] = (res[battle.id] || 0) + 1;
+    return res;
+  };
+
+  var battles = (0, _tools.times)(BATTLES, function () {
+    return rivals.map(selectStat).reduce(battleResult, { id: 'draw', value: -1 });
+  });
+  var result = battles.reduce(matchResult, {});
+
+  return [(0, _tools.reduce)(result, function (res, value, key) {
+    return value > res.score ? { winner: key, score: value } : res;
+  }, { score: -1 }), battles];
+};
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.$stats = exports.$card = exports.$column = undefined;
+
+var _tools = __webpack_require__(0);
+
+var _dom = __webpack_require__(1);
+
+var $column = exports.$column = function $column(title, items, onChange) {
+  var $title = (0, _dom.h2)();
+  $title.innerHTML = title;
+
+  var $select = (0, _dom.select)({ class: 'selector' }, {
+    change: function change(ev) {
+      return onChange(items.filter(function (item) {
+        return item.id === ev.target.value;
+      })[0]);
+    }
+  });
+  items.forEach(function (item) {
+    var $option = (0, _dom.option)({ value: item.id });
+    $option.innerHTML = item.name;
+    $select.appendChild($option);
+  });
+
+  var $container = (0, _dom.div)({ class: 'column' });
+  $container.appendChild($title);
+  $container.appendChild($select);
+  return $container;
+};
+
+var $card = exports.$card = function $card(_ref) {
+  var name = _ref.name,
+      realName = _ref.realName,
+      portrait = _ref.portrait;
+
+  var $name = (0, _dom.h2)({ class: 'name' });
+  $name.innerHTML = name;
+
+  var $realName = (0, _dom.h2)({ class: 'real-name' });
+  $realName.innerHTML = realName;
+
+  var $portrait = (0, _dom.img)({ class: 'portrait', src: portrait });
+
+  var $container = (0, _dom.div)({ class: 'card' });
+  $container.appendChild($name);
+  $container.appendChild($realName);
+  $container.appendChild($portrait);
+  return $container;
+};
+
+var $stats = exports.$stats = function $stats(stats) {
+  var $container = (0, _dom.div)({ class: 'stats' });
+  (0, _tools.forEach)(stats, function (value, key) {
+    var $stat = (0, _dom.div)();
+    var $name = (0, _dom.label)();
+    var $value = (0, _dom.span)({ style: 'width: ' + value + '%;' });
+    $name.innerText = key + ': ' + value;
+    $stat.appendChild($name);
+    $stat.appendChild($value);
+    $container.appendChild($stat);
+  });
+  return $container;
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * EXERCISE 5: (Wrap up)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * Finish the app, implement the game API and the following widgets:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * - Stats
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *  <div class="stats">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *    <div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *      <label>${name}</label>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *      <span style="width: ${value}%"></span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *    </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *  </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * - Fight Button
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *  <button class="fight" onclick="onClick">Fight!</button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * - Random Button
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *  <button class="random" onclick="onClick"></button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * - Winner Banner
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *  <h2 class="result">${name}</h2>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * Events:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *  - Fight onClick: Run fight function from the API and display the result
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          *  - Random onClick: Select 2 random fighters
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */
+
+var _data = __webpack_require__(2);
+
+var _tools = __webpack_require__(0);
+
+var _dom = __webpack_require__(1);
+
+var _widgets = __webpack_require__(4);
+
+var _game = __webpack_require__(3);
+
+var RIVALS = 2;
+
+var alignments = (0, _data.getAlignments)();
+var rivals = (0, _tools.times)(RIVALS, function () {
+  return {
+    $character: (0, _dom.div)({ class: 'group rival' }),
+    $stats: (0, _dom.div)({ class: 'group' })
+  };
+});
+var $arena = (0, _dom.div)({ class: 'group arena' });
+
+var lastSelected = -1;
+var selectCharacter = function selectCharacter(characters) {
+  return function (character) {
+    var selected = lastSelected !== 0 ? 0 : 1;
+    var rival = characters[selected];
+    rival.item = character;
+    rival.$character.innerHTML = '';
+    rival.$character.appendChild((0, _widgets.$card)(character));
+    rival.$stats.innerHTML = '';
+    rival.$stats.appendChild((0, _widgets.$stats)(character.stats));
+    lastSelected = selected;
+  };
+};
+
+var selectRival = selectCharacter(rivals);
+
+var selectRandom = function selectRandom() {
+  selectRival((0, _data.getRandomCharacter)());
+  selectRival((0, _data.getRandomCharacter)());
+};
+
+selectRandom();
+
+var $banner = void 0;
+
+var removeBanner = function removeBanner() {
+  if ($banner) {
+    $arena.removeChild($banner);
+    $banner = undefined;
+  }
+};
+
+var setBanner = function setBanner(name) {
+  removeBanner();
+  $banner = (0, _dom.h2)({ class: 'result' });
+  $banner.innerHTML = name;
+  $arena.appendChild($banner);
+};
+
+var $fight = (0, _dom.button)({ class: 'fight' }, {
+  click: function click() {
+    var _fight = (0, _game.fight)(rivals.map(function ($rival) {
+      return $rival.item;
+    })),
+        _fight2 = _slicedToArray(_fight, 2),
+        result = _fight2[0],
+        battles = _fight2[1];
+
+    var character = (0, _data.getCharacter)(result.winner);
+    setBanner(character.name);
+    console.log(battles);
+  }
+});
+$fight.innerHTML = 'Fight!';
+$arena.appendChild($fight);
+
+var $random = (0, _dom.button)({ class: 'random' }, {
+  click: function click() {
+    removeBanner();
+    selectRandom();
+  }
+});
+$arena.appendChild($random);
+
+var $left = (0, _dom.div)({ class: 'column' });
+$left.appendChild(rivals[0].$character);
+$left.appendChild(rivals[0].$stats);
+$arena.appendChild($left);
+
+var $right = (0, _dom.div)({ class: 'column' });
+$right.appendChild(rivals[1].$character);
+$right.appendChild(rivals[1].$stats);
+$arena.appendChild($right);
+
+var $lists = (0, _dom.div)({ class: 'group' });
+(0, _tools.forEach)(alignments, function (value, key) {
+  return $lists.appendChild((0, _widgets.$column)(key, value, selectRival));
+});
+
+var $mainTitle = (0, _dom.h1)({ class: 'main-title' });
+$mainTitle.innerHTML = 'Who will win this time?';
+var $root = document.getElementById('workshop');
+
+$root.appendChild($mainTitle);
+$root.appendChild($arena);
+$root.appendChild($lists);
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -42621,256 +42906,6 @@ module.exports = [
 		}
 	}
 ];
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tools__ = __webpack_require__(0);
-/**
- * Created by thram on 21/04/17.
- */
-
-
-const BATTLES = 6;
-
-const throwDice = (max = 100) => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__tools__["e" /* random */])(0, max);
-/* unused harmony export throwDice */
-
-
-const fight = (rivals) => {
-  const rivalsStats = rivals.map(rival => rival.stats);
-  const stats = Object.keys(rivalsStats[0]);
-  const totalStats = stats.length;
-  const scores = {};
-  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__tools__["f" /* times */])(BATTLES, () => {
-    const result = rivalsStats.reduce((res, rivalStats, index) => {
-      const randomStat = stats[__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__tools__["e" /* random */])(0, totalStats)];
-      const value = throwDice(rivalStats[randomStat]);
-      if (value === res.value) {
-        res.winner = -1;
-      } else if (value > res.value) {
-        res.winner = index;
-        res.value = value;
-      }
-      return res;
-    }, { value: 0, winner: -1 });
-    scores[result.winner] = (scores[result.winner] || 0) + 1;
-  });
-  const result = Object.keys(scores).reduce((res, index) => (scores[index] > res.value ? {
-    value: scores[index],
-    winner: index,
-  } : res), { value: 0, winner: -1 });
-  return rivals[result.winner];
-};
-/* harmony export (immutable) */ __webpack_exports__["a"] = fight;
-
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dom__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tools__ = __webpack_require__(0);
-/**
- * Created by thram on 20/04/17.
- */
-
-
-
-
-const selector = (options, events) => {
-  const $select = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].select({ class: 'selector' }, events);
-  options.forEach((option) => {
-    const $option = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].option({ value: option.id });
-    $option.innerHTML = option.name;
-    $select.appendChild($option);
-  });
-  return $select;
-};
-/* unused harmony export selector */
-
-
-
-const alignmentColumn = (title, items, onSelect) => {
-  const $column = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].column();
-  const $title = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].title();
-  $title.innerHTML = `${title} (${items.length})`;
-  $column.appendChild($title);
-  const filterById = id => __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__tools__["c" /* filterList */])(item => item.id === id)(items);
-  $column.appendChild(selector(items, {
-    change: ev => onSelect(filterById(ev.target.value)[0]),
-  }));
-  return $column;
-};
-/* harmony export (immutable) */ __webpack_exports__["b"] = alignmentColumn;
-
-
-
-const card = (character = {}) => {
-  const $card = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].div({ class: 'card' });
-  if (character.name) {
-    const $name = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].title({ class: 'name' });
-    $name.innerHTML = character.name;
-    $card.appendChild($name);
-  }
-
-  if (character.realName) {
-    const $realName = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].title({ class: 'real-name' });
-    $realName.innerHTML = character.realName;
-    $card.appendChild($realName);
-  }
-
-  const $portrait = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].div({
-    class: 'portrait',
-    style: character.portrait ? `background-image: url(${character.portrait})` : '',
-  });
-  $card.appendChild($portrait);
-
-  const $container = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].column();
-  $container.appendChild($card);
-
-  if (character.stats) {
-    const $statsContainer = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].div({ class: 'stats' });
-    const stats = ['intelligence', 'strength', 'speed', 'durability', 'power', 'combat'];
-
-    stats.forEach((stat) => {
-      const value = character.stats[stat];
-      const $stat = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].div();
-      const $name = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].label();
-      const $value = __WEBPACK_IMPORTED_MODULE_0__dom__["a" /* default */].span({ style: `width: ${value}%; background-color: ${__WEBPACK_IMPORTED_MODULE_1__helpers__["b" /* COLORS */].red};` });
-      $name.innerText = `${stat}: ${value}`;
-      $stat.appendChild($name);
-      $stat.appendChild($value);
-      $statsContainer.appendChild($stat);
-    });
-
-    $container.appendChild($statsContainer);
-  }
-  $container.character = character;
-  return $container;
-};
-/* harmony export (immutable) */ __webpack_exports__["a"] = card;
-
-
-/* unused harmony default export */ var _unused_webpack_default_export = ({ selector, alignmentColumn, card });
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/**
- * Created by thram on 19/04/17.
- */
-// export const curry = fn => (...args) => fn.bind(null, ...args);
-const curry = fn => (...args1) => (
-  args1.length === fn.length ? fn(...args1) : (...args2) => {
-    const args = [...args1, ...args2];
-    return args.length >= fn.length ? fn(...args) : curry(fn)(...args);
-  }
-);
-/* unused harmony export curry */
-
-const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x);
-/* harmony export (immutable) */ __webpack_exports__["a"] = pipe;
-
-
-const compose = (...fns) => x => fns.reduceRight((v, f) => f(v), x);
-/* unused harmony export compose */
-
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_json__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__data_json__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dom__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__game__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tools__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__widgets__ = __webpack_require__(5);
-/**
- * EXERCISE 3:
- * Use compose, pipe or curry to improve the code, also:
- * - Replace the list with a select button
- * - Display the list in columns
- * - Create 2 cards widgets with the selected rivals showing:
- *     - name
- *     - realName
- *     - portrait
- *     - stats: intelligence, strength, speed, durability, power, combat
- * - Add the cards on top of the lists in 2 columns
- * - Render it into the DOM
- * - Use the styles on `base.css`
- */
-
-
-
-
-
-
-
-
-const alignments = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__helpers__["a" /* groupByAlignment */])(__WEBPACK_IMPORTED_MODULE_0__data_json___default.a);
-const randomGood = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__tools__["a" /* randomItem */])(alignments.good);
-const randomBad = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__tools__["a" /* randomItem */])(alignments.bad);
-
-const $arena = __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].group('arena');
-const $characters = __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].group('characters');
-
-__WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].$root.appendChild($arena);
-__WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].$root.appendChild($characters);
-
-
-let lastSelected;
-const $rivals = [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__widgets__["a" /* card */])(randomGood()), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__widgets__["a" /* card */])(randomBad())];
-const $winner = __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].title({ class: 'winner' });
-
-const selectRival = (rival, character) => {
-  const $newCharacter = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__widgets__["a" /* card */])(character);
-  $winner.className = 'winner';
-  $arena.replaceChild($newCharacter, $rivals[rival]);
-  $rivals[rival] = $newCharacter;
-  lastSelected = rival;
-};
-
-const toggleRival = character => selectRival(lastSelected === 0 ? 1 : 0, character);
-
-const $random = __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].button({ class: 'random' }, {
-  click: () => {
-    toggleRival(randomGood());
-    toggleRival(randomBad());
-  },
-});
-const $fight = __WEBPACK_IMPORTED_MODULE_1__dom__["a" /* default */].button({ class: 'fight' }, {
-  click: () => {
-    const winner = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__game__["a" /* fight */])($rivals.map($rival => $rival.character));
-    $winner.innerText = winner.name;
-    $winner.className = 'winner show';
-  },
-});
-$fight.innerText = 'Fight!';
-
-
-$rivals.map($rival => $arena.appendChild($rival));
-$arena.appendChild($random);
-$arena.appendChild($fight);
-$arena.appendChild($winner);
-
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__tools__["b" /* forEach */])(alignments, (value, key) =>
-  $characters.appendChild(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__widgets__["b" /* alignmentColumn */])(key, value, toggleRival)));
-
-
 
 /***/ })
 /******/ ]);
