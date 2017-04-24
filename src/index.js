@@ -55,13 +55,17 @@ const selectRandom = () => {
 
 selectRandom();
 
-const $random = button({ class: 'random' }, { click: selectRandom });
-$arena.appendChild($random);
-
 let $banner;
 
+const removeBanner = () => {
+  if ($banner) {
+    $arena.removeChild($banner);
+    $banner = undefined;
+  }
+};
+
 const setBanner = (name) => {
-  if ($banner) $arena.removeChild($banner);
+  removeBanner();
   $banner = h2({ class: 'result' });
   $banner.innerHTML = name;
   $arena.appendChild($banner);
@@ -80,6 +84,14 @@ const $fight = button(
 );
 $fight.innerHTML = 'Fight!';
 $arena.appendChild($fight);
+
+const $random = button({ class: 'random' }, {
+  click: () => {
+    removeBanner();
+    selectRandom();
+  },
+});
+$arena.appendChild($random);
 
 const $left = div({ class: 'column' });
 $left.appendChild(rivals[0].$character);
