@@ -4,96 +4,36 @@
  * based on your code functionality.
  */
 
-import { pipe } from './fp';
-import characters from './data.json';
+import { getAlignments } from './data';
+import { forEach } from './tools';
+import { div } from './dom';
+import { $column, $card } from './widgets';
 
-const isEmpty = (obj = {}) => !Object.keys(obj).length;
+const alignments = getAlignments();
 
-const forEach = (obj, callback) => (
-  Array.isArray(obj) ?
-    obj.forEach(callback)
-    : Object.keys(obj).forEach(key => callback(obj[key], key))
-);
+const $rivals = [div({ class: 'group' }), div({ class: 'group' })];
+const $arena = div({ class: 'group' });
 
-const setAttr = attr => (el, value) => el.setAttribute(attr, value);
-const setAttrs = (el, attrs) => forEach(attrs, (value, attr) => setAttr(attr)(el, value));
+const $left = div({ class: 'column' });
+$left.appendChild($rivals[0]);
+$arena.appendChild($left);
 
-const addEvents = (el, events) =>
-  forEach(events, (callback, event) =>
-    el.addEventListener(event, callback));
+const $right = div({ class: 'column' });
+$right.appendChild($rivals[1]);
+$arena.appendChild($right);
 
-const createTag = tag => (attrs = {}, events = {}) => {
-  const $element = document.createElement(tag);
-  setAttrs($element, attrs);
-  addEvents($element, events);
-  return $element;
-};
-
-const div = createTag('div');
-const h2 = createTag('h2');
-const img = createTag('img');
-const select = createTag('select');
-const option = createTag('option');
-
-const $column = (title, items, onChange) => {
-  const $title = h2();
-  $title.innerHTML = title;
-
-  const $select = select({ class: 'selector' }, {
-    change: ev => onChange(items.filter(item => item.id === ev.target.value)[0]),
-  });
-  items.forEach((item) => {
-    const $option = option({ value: item.id });
-    $option.innerHTML = item.name;
-    $select.appendChild($option);
-  });
-
-  const $container = div({ class: 'column' });
-  $container.appendChild($title);
-  $container.appendChild($select);
-  return $container;
-};
-
-const $card = ({ name, realName, portrait }) => {
-  const $name = h2({ class: 'name' });
-  $name.innerHTML = name;
-
-  const $realName = h2({ class: 'real-name' });
-  $realName.innerHTML = realName;
-
-  const $portrait = img({ class: 'portrait', src: portrait });
-
-  const $container = div({ class: 'card' });
-  $container.appendChild($name);
-  $container.appendChild($realName);
-  $container.appendChild($portrait);
-  return $container;
-};
-
-
-const addToAlignment = (init = [], item) => init.concat(item);
-
-const filterByStats = (data = []) => data.filter(item => !isEmpty(item.stats));
-
-const byAlignment = (data = []) => data.reduce((result, item) => {
-  const alignment = item.biography.alignment;
-  result[alignment] = addToAlignment(result[alignment], item);
-  return result;
-}, {});
-
-const alignments = pipe(filterByStats, byAlignment)(characters);
-
-const $root = document.getElementById('workshop');
-
-const $selected = div({ class: 'group' });
 const $lists = div({ class: 'group' });
-$root.appendChild($selected);
-$root.appendChild($lists);
-
-Object.keys(alignments).forEach((key) => {
-  $lists.appendChild($column(key, alignments[key], (item) => {
-    $selected.innerHTML = '';
-    $selected.appendChild($card(item));
+let lastSelected = -1;
+forEach(alignments, (value, key) => {
+  $lists.appendChild($column(key, value, (item) => {
+    const selected = lastSelected !== 0 ? 0 : 1;
+    $rivals[selected].innerHTML = '';
+    $rivals[selected].appendChild($card(item));
+    lastSelected = selected;
   }));
 });
 
+const $root = document.getElementById('workshop');
+
+$root.appendChild($arena);
+$root.appendChild($lists);
