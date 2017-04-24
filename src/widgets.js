@@ -1,4 +1,5 @@
-import { h2, select, option, div, img } from './dom';
+import { forEach } from './tools';
+import { h2, select, option, div, img, label, span } from './dom';
 
 export const $column = (title, items, onChange) => {
   const $title = h2();
@@ -32,5 +33,19 @@ export const $card = ({ name, realName, portrait }) => {
   $container.appendChild($name);
   $container.appendChild($realName);
   $container.appendChild($portrait);
+  return $container;
+};
+
+export const $stats = (stats) => {
+  const $container = div({ class: 'stats' });
+  forEach(stats, (value, key) => {
+    const $stat = div();
+    const $name = label();
+    const $value = span({ style: `width: ${value}%;` });
+    $name.innerText = `${key}: ${value}`;
+    $stat.appendChild($name);
+    $stat.appendChild($value);
+    $container.appendChild($stat);
+  });
   return $container;
 };

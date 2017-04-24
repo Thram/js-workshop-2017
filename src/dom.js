@@ -14,9 +14,13 @@ const createTag = tag => (attrs = {}, events = {}) => {
 };
 
 export const div = createTag('div');
+export const h1 = createTag('h1');
 export const h2 = createTag('h2');
 export const img = createTag('img');
 export const select = createTag('select');
 export const option = createTag('option');
+export const button = createTag('button');
+export const label = createTag('label');
+export const span = createTag('span');
 
-export default { div, h2, img, select, option };
+export default { div, h1, h2, img, select, option, button, label, span };

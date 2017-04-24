@@ -55,6 +55,11 @@ input {
     margin-bottom: .3rem;
 }
 
+.main-title {
+    text-align: center;
+    font-size: 3rem;
+}
+
 .column {
     flex: 1;
     padding: 0 1rem;
@@ -108,20 +113,19 @@ button {
     transform: skew(-15deg);
 }
 
-.real-name, .name, .winner {
+.real-name, .name, .result {
     background-color: #fff;
     border: solid 2px #000;
     margin: 0;
     padding: 3px 10px;
 }
 
-.winner {
+.result {
     position: absolute;
     left: 50%;
-    transform: skew(-15deg) translateX(-50%) translateY(-50%) scale(0);
     top: 20rem;
     font-size: 3.5rem;
-    opacity: 0;
+    animation: zoomIn 0.4s ease forwards;
 }
 
 .random {
@@ -146,11 +150,16 @@ button {
     transform: skew(-15deg) translateX(-50%) translateY(-50%) scale(1);
 }
 
+.stats {
+    width: 50%;
+    margin: auto;
+}
+
 .stats span {
     display: block;
     height: 1rem;
     width: 0;
-    background: #32576A;
+    background-color: #E42E45;
 }
 
 .arena {
@@ -174,8 +183,19 @@ button {
 }
 
 .portrait {
-    height: 25rem;
+    height: 20rem;
     margin: auto;
     display: block;
-    min-width: 20rem;
+    min-width: 15rem;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: skew(-15deg) translateX(-50%) translateY(-50%) scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: skew(-15deg) translateX(-50%) translateY(-50%) scale(1);
+        opacity: 1;
+    }
 }
