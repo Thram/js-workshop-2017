@@ -33,7 +33,7 @@ export default {
   devtool: 'source-map',
   module: {
     rules: [
-      { test: /\.jsx?$/, use: 'babel-loader?cacheDirectory=true', include: `${__dirname}/admin/` },
+      { test: /\.jsx?$/, use: 'babel-loader?cacheDirectory=true', include: `${__dirname}/src/` },
       { test: /\.(jpe?g|png|gif|svg)$/i, use: 'file-loader?name=images/[name].[ext]' },
       { test: /\.(mp3)$/i, use: 'file-loader?name=audio/[name].[ext]' },
       { test: /\.(otf)$/i, use: 'file-loader?name=fonts/[name].[ext]' },

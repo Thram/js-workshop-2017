@@ -1,34 +1,36 @@
-/**
- * Created by thram on 21/04/17.
- */
-import { random, times } from './tools';
+import { random, times, reduce } from './tools';
 
 const BATTLES = 6;
 
 export const throwDice = (max = 100) => random(0, max);
 
 export const fight = (rivals) => {
-  const rivalsStats = rivals.map(rival => rival.stats);
-  const stats = Object.keys(rivalsStats[0]);
+  const stats = Object.keys(rivals[0].stats);
   const totalStats = stats.length;
-  const scores = {};
-  times(BATTLES, () => {
-    const result = rivalsStats.reduce((res, rivalStats, index) => {
-      const randomStat = stats[random(0, totalStats)];
-      const value = throwDice(rivalStats[randomStat]);
-      if (value === res.value) {
-        res.winner = -1;
-      } else if (value > res.value) {
-        res.winner = index;
-        res.value = value;
-      }
-      return res;
-    }, { value: 0, winner: -1 });
-    scores[result.winner] = (scores[result.winner] || 0) + 1;
-  });
-  const result = Object.keys(scores).reduce((res, index) => (scores[index] > res.value ? {
-    value: scores[index],
-    winner: index,
-  } : res), { value: 0, winner: -1 });
-  return rivals[result.winner];
+
+  const selectStat = (rival) => {
+    const stat = stats[random(0, totalStats - 1)];
+    return { id: rival.id, stat, value: throwDice(rival.stats[stat]) };
+  };
+
+  const battleResult = (res, rival) => (rival.value === res.value
+    ? { id: 'draw', value: -1 }
+    : {
+      ...res,
+      ...(rival.value > res.value ? rival : {}),
+    });
+
+  const matchResult = (res, battle) => {
+    res[battle.id] = (res[battle.id] || 0) + 1;
+    return res;
+  };
+
+  const battles = times(BATTLES, () => rivals
+    .map(selectStat)
+    .reduce(battleResult, { id: 'draw', value: -1 }));
+  const result = battles.reduce(matchResult, {});
+
+  return [reduce(result, (res, value, key) => (
+    value > res.score ? { winner: key, score: value } : res
+  ), { score: -1 }), battles];
 };

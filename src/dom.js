@@ -1,10 +1,4 @@
-/**
- * Created by thram on 20/04/17.
- */
 import { forEach } from './tools';
-
-const $root = document.getElementById('workshop');
-
 const setAttr = attr => (el, value) => el.setAttribute(attr, value);
 const setAttrs = (el, attrs) => forEach(attrs, (value, attr) => setAttr(attr)(el, value));
 
@@ -19,22 +13,14 @@ const createTag = tag => (attrs = {}, events = {}) => {
   return $element;
 };
 
-const div = createTag('div');
+export const div = createTag('div');
+export const h1 = createTag('h1');
+export const h2 = createTag('h2');
+export const img = createTag('img');
+export const select = createTag('select');
+export const option = createTag('option');
+export const button = createTag('button');
+export const label = createTag('label');
+export const span = createTag('span');
 
-export default {
-  $root,
-  get: (selector, element) => (element || $root).querySelectorAll(selector),
-  create: createTag,
-  div,
-  bigTitle: createTag('h1'),
-  title: createTag('h2'),
-  select: createTag('select'),
-  option: createTag('option'),
-  input: createTag('input'),
-  image: createTag('img'),
-  label: createTag('label'),
-  span: createTag('span'),
-  button: createTag('button'),
-  group: (classes = '') => div({ class: `group ${classes}` }),
-  column: (classes = '') => div({ class: `column ${classes}` }),
-};
+export default { div, h1, h2, img, select, option, button, label, span };

@@ -1,76 +1,51 @@
-/**
- * Created by thram on 20/04/17.
- */
-import dom from './dom';
-import { COLORS } from './helpers';
-import { filterList } from './tools';
+import { forEach } from './tools';
+import { h2, select, option, div, img, label, span } from './dom';
 
-export const selector = (options, events) => {
-  const $select = dom.select({ class: 'selector' }, events);
-  options.forEach((option) => {
-    const $option = dom.option({ value: option.id });
-    $option.innerHTML = option.name;
+export const $column = (title, items, onChange) => {
+  const $title = h2();
+  $title.innerHTML = title;
+
+  const $select = select({ class: 'selector' }, {
+    change: ev => onChange(items.filter(item => item.id === ev.target.value)[0]),
+  });
+  items.forEach((item) => {
+    const $option = option({ value: item.id });
+    $option.innerHTML = item.name;
     $select.appendChild($option);
   });
-  return $select;
-};
 
-
-export const alignmentColumn = (title, items, onSelect) => {
-  const $column = dom.column();
-  const $title = dom.title();
-  $title.innerHTML = `${title} (${items.length})`;
-  $column.appendChild($title);
-  const filterById = id => filterList(item => item.id === id)(items);
-  $column.appendChild(selector(items, {
-    change: ev => onSelect(filterById(ev.target.value)[0]),
-  }));
-  return $column;
-};
-
-
-export const card = (character = {}) => {
-  const $card = dom.div({ class: 'card' });
-  if (character.name) {
-    const $name = dom.title({ class: 'name' });
-    $name.innerHTML = character.name;
-    $card.appendChild($name);
-  }
-
-  if (character.realName) {
-    const $realName = dom.title({ class: 'real-name' });
-    $realName.innerHTML = character.realName;
-    $card.appendChild($realName);
-  }
-
-  const $portrait = dom.div({
-    class: 'portrait',
-    style: character.portrait ? `background-image: url(${character.portrait})` : '',
-  });
-  $card.appendChild($portrait);
-
-  const $container = dom.column();
-  $container.appendChild($card);
-
-  if (character.stats) {
-    const $statsContainer = dom.div({ class: 'stats' });
-    const stats = ['intelligence', 'strength', 'speed', 'durability', 'power', 'combat'];
-
-    stats.forEach((stat) => {
-      const value = character.stats[stat];
-      const $stat = dom.div();
-      const $name = dom.label();
-      const $value = dom.span({ style: `width: ${value}%; background-color: ${COLORS.red};` });
-      $name.innerText = `${stat}: ${value}`;
-      $stat.appendChild($name);
-      $stat.appendChild($value);
-      $statsContainer.appendChild($stat);
-    });
-
-    $container.appendChild($statsContainer);
-  }
-  $container.character = character;
+  const $container = div({ class: 'column' });
+  $container.appendChild($title);
+  $container.appendChild($select);
   return $container;
 };
 
-export default { selector, alignmentColumn, card };
+export const $card = ({ name, realName, portrait }) => {
+  const $name = h2({ class: 'name' });
+  $name.innerHTML = name;
+
+  const $realName = h2({ class: 'real-name' });
+  $realName.innerHTML = realName;
+
+  const $portrait = img({ class: 'portrait', src: portrait });
+
+  const $container = div({ class: 'card' });
+  $container.appendChild($name);
+  $container.appendChild($realName);
+  $container.appendChild($portrait);
+  return $container;
+};
+
+export const $stats = (stats) => {
+  const $container = div({ class: 'stats' });
+  forEach(stats, (value, key) => {
+    const $stat = div();
+    const $name = label();
+    const $value = span({ style: `width: ${value}%;` });
+    $name.innerText = `${key}: ${value}`;
+    $stat.appendChild($name);
+    $stat.appendChild($value);
+    $container.appendChild($stat);
+  });
+  return $container;
+};
