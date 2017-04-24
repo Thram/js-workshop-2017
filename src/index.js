@@ -17,6 +17,7 @@
  * - onChange: Update card
  */
 
+import { pipe } from './fp';
 import characters from './data.json';
 
 const isEmpty = (obj = {}) => !Object.keys(obj).length;
@@ -93,8 +94,7 @@ const byAlignment = (data = []) => data.reduce((result, item) => {
   return result;
 }, {});
 
-const cleanList = filterByStats(characters);
-const alignments = byAlignment(cleanList);
+const alignments = pipe(filterByStats, byAlignment)(characters);
 
 const $root = document.getElementById('workshop');
 
