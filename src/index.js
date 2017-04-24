@@ -1,20 +1,7 @@
 /**
- * EXERCISE 3:
- * Display the list in columns, use compose, pipe or curry (instead of templates)
- * to create helpers to build the following widgets:
- * - Column:
- * <div class="column">
- *  <h2>${title} (${items.length})</h2>
- *  <select onchange="onChange"></select>
- * </div>
- * - Card:
- * <div class="card">
- *  <h2 class="name">${name}</h2>
- *  <h2 class="real-name">${realName}</h2>
- *  <img class="portrait" src="${portrait}" />
- * </div>
- * Events:
- * - onChange: Update card
+ * EXERCISE 4:
+ * Your code is getting messy, move your code to `dom.js`, `tools.js`, `widgets.js`, `data.js`,
+ * based on your code functionality.
  */
 
 import { pipe } from './fp';
