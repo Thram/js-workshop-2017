@@ -1,7 +1,22 @@
 /**
- * EXERCISE 4:
- * Your code is getting messy, move your code to `dom.js`, `tools.js`, `widgets.js`, `data.js`,
- * based on your code functionality.
+ * EXERCISE 5: (Wrap up)
+ * Finish the app, implement the game API and the following widgets:
+ * - Stats
+ *  <div class="stats">
+ *    <div>
+ *      <label>${name}</label>
+ *      <span style="width: ${value}%"></span>
+ *    </div>
+ *  </div>
+ * - Fight Button
+ *  <button class="fight" onclick="onClick">Fight!</button>
+ * - Random Button
+ *  <button class="random" onclick="onClick"></button>
+ * - Winner Banner
+ *  <h2 class="result">${name}</h2>
+ * Events:
+ *  - Fight onClick: Run fight function from the API and display the result
+ *  - Random onClick: Select 2 random fighters
  */
 
 import { getAlignments } from './data';
