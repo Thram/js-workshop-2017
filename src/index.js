@@ -1,11 +1,20 @@
 /**
  * EXERCISE 3:
- * Use compose, pipe or curry to improve the code, also:
- * - Display the list in columns and improve styles using `styles.js`
- * - Make list behave like dropdowns
- * - Display them in different lists with the alignment as Title
- * - Display the total next to the title in the format "(number)"
- * - Render it into the DOM
+ * Display the list in columns, use compose, pipe or curry (instead of templates)
+ * to create helpers to build the following widgets:
+ * - Column:
+ * <div class="column">
+ *  <h2>${title} (${items.length})</h2>
+ *  <select onchange="onChange"></select>
+ * </div>
+ * - Card:
+ * <div class="card">
+ *  <h2 class="name">${name}</h2>
+ *  <h2 class="real-name">${realName}</h2>
+ *  <img class="portrait" src="${portrait}" />
+ * </div>
+ * Events:
+ * - onChange: Update card
  */
 
 import characters from './data.json';
@@ -25,8 +34,7 @@ const $root = document.getElementById('workshop');
 
 const addToAlignment = (init = [], item) => init.concat(item);
 
-const filterByStats = (data = []) => data.reduce((result, item) =>
-  (!isEmpty(item.stats) ? result.concat(item) : result), []);
+const filterByStats = (data = []) => data.filter(item => !isEmpty(item.stats));
 
 const byAlignment = (data = []) => data.reduce((result, item) => {
   const alignment = item.biography.alignment;
