@@ -7,6 +7,10 @@ const INDEX_HTML_SETUP = {
   template: 'node_modules/html-webpack-template/index.ejs',
   title: 'JS Workshop 2017',
   appMountId: 'workshop',
+  links: [
+    'https://fonts.googleapis.com/css?family=Bangers',
+    './src/base.css',
+  ],
   meta: [
     {
       name: 'viewport',
