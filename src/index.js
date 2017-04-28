@@ -24,10 +24,8 @@ const isEmpty = (obj = {}) => !Object.keys(obj).length;
 const createItem = ({ name }) => `<li>${name}</li>`;
 
 const createList = (title, items) => `
-    <div>
     <h2>${title} (${items.length})</h2>
     <ul>${items.map(createItem).join('')}</ul>
-    </div>
 `;
 
 const addToAlignment = (init = [], item) => init.concat(item);
