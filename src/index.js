@@ -1,6 +1,6 @@
 /**
  * EXERCISE 3:
- * Display the list in columns, use compose, pipe or curry (instead of templates)
+ * Display the list in columns, use the Web API instead of templates
  * to create helpers to build the following widgets:
  * - Column:
  * <div class="column">
