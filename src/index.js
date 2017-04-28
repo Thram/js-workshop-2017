@@ -30,20 +30,18 @@ const createList = (title, items) => `
     </div>
 `;
 
-const $root = document.getElementById('workshop');
-
 const addToAlignment = (init = [], item) => init.concat(item);
-
-const filterByStats = (data = []) => data.filter(item => !isEmpty(item.stats));
 
 const byAlignment = (data = []) => data.reduce((result, item) => {
   const alignment = item.biography.alignment;
-  result[alignment] = addToAlignment(result[alignment], item);
-  return result;
+  return { ...result, [alignment]: addToAlignment(result[alignment], item) };
 }, {});
 
-const cleanList = filterByStats(characters);
+const cleanList = characters.filter(item => !isEmpty(item.stats));
+
 const alignments = byAlignment(cleanList);
+
+const $root = document.getElementById('workshop');
 
 Object.keys(alignments).forEach((key) => {
   $root.innerHTML += createList(key, alignments[key]);

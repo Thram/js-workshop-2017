@@ -6,7 +6,6 @@ Modern JavaScript Workshop
 - ES6/7
 - Yarn (instead of classic `npm`)
 - Babel
-- Tape
 - ESLint
 - Webpack
 
