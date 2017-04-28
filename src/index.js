@@ -4,7 +4,6 @@
  * based on your code functionality.
  */
 
-import { pipe } from './fp';
 import characters from './data.json';
 
 const isEmpty = (obj = {}) => !Object.keys(obj).length;
@@ -70,25 +69,19 @@ const $card = ({ name, realName, portrait }) => {
   return $container;
 };
 
-
 const addToAlignment = (init = [], item) => init.concat(item);
-
-const filterByStats = (data = []) => data.filter(item => !isEmpty(item.stats));
 
 const byAlignment = (data = []) => data.reduce((result, item) => {
   const alignment = item.biography.alignment;
-  result[alignment] = addToAlignment(result[alignment], item);
-  return result;
+  return { ...result, [alignment]: addToAlignment(result[alignment], item) };
 }, {});
 
-const alignments = pipe(filterByStats, byAlignment)(characters);
+const cleanList = characters.filter(item => !isEmpty(item.stats));
 
-const $root = document.getElementById('workshop');
+const alignments = byAlignment(cleanList);
 
 const $selected = div({ class: 'group' });
 const $lists = div({ class: 'group' });
-$root.appendChild($selected);
-$root.appendChild($lists);
 
 Object.keys(alignments).forEach((key) => {
   $lists.appendChild($column(key, alignments[key], (item) => {
@@ -96,4 +89,9 @@ Object.keys(alignments).forEach((key) => {
     $selected.appendChild($card(item));
   }));
 });
+
+const $root = document.getElementById('workshop');
+
+$root.appendChild($selected);
+$root.appendChild($lists);
 
