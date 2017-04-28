@@ -1,4 +1,5 @@
 import { forEach } from './tools';
+
 const setAttr = attr => (el, value) => el.setAttribute(attr, value);
 const setAttrs = (el, attrs) => forEach(attrs, (value, attr) => setAttr(attr)(el, value));
 
