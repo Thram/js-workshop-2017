@@ -3,7 +3,7 @@
  * List all the items on the file:
  * - Filter the ones that have no stats
  * - Separate them by alignment
- * - Display them in 2 lists with the alignment as Title
+ * - Display them in different lists with the alignment as Title
  * - Display the total next to the title in the format "(number)"
  * - Render it into the DOM
  */
