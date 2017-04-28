@@ -14,15 +14,5 @@
       }
     ],
     "stage-0"
-  ],
-  "plugins": [
-    ["transform-object-rest-spread", { "useBuiltIns": true }]
-  ],
-  "env": {
-    "test": {
-      "plugins": [
-        "istanbul"
-      ]
-    }
-  }
+  ]
 }
