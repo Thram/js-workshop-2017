@@ -1,7 +1,7 @@
 # js-workshop-2017
 Modern JavaScript Workshop 
 
-### [Examples](https://codesandbox.io/s/pYNR2Qx0V)
+### [Examples](https://codesandbox.io/s/y8Qw8gKzg)
 ### [Solution](https://codesandbox.io/s/319BV57XA)
 
 ## Technologies Covered
