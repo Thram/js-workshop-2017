@@ -1,6 +1,9 @@
 # js-workshop-2017
 Modern JavaScript Workshop 
 
+### [Examples](https://codesandbox.io/s/8Mojvmnl)
+### [Solution](https://codesandbox.io/s/xvxvPZ4nz)
+
 ## Technologies Covered
 
 - ES6/7
