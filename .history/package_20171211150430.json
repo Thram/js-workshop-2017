@@ -9,7 +9,7 @@
     "prebuild": "rimraf dist",
     "build": "npm run lint && NODE_ENV=production webpack -p",
     "example": "node examples/index.js",
-    "lint": "eslint src --ext .jsx,.js --fix",
+    "lint": "eslint src --ext --fix .jsx,.js",
     "start": "webpack-dev-server --host 0.0.0.0 --port 4000"
   },
   "author": "Thram <thramposo@gmail.com> (https://thram.github.io/)",

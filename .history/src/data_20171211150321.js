@@ -7,7 +7,7 @@ const cleanList = characters.filter(item => !isEmpty(item.stats));
 const addToAlignment = (init = [], item) => init.concat(item);
 
 const byAlignment = (data = []) => data.reduce((result, item) => {
-  const { alignment } = item.biography;
+  const { alignment} = item.biography;
   return { ...result, [alignment]: addToAlignment(result[alignment], item) };
 }, {});
 

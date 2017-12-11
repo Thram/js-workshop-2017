@@ -4,8 +4,7 @@ const setAttr = attr => (el, value) => el.setAttribute(attr, value);
 const setAttrs = (el, attrs) => forEach(attrs, (value, attr) => setAttr(attr)(el, value));
 
 const addEvents = (el, events) =>
-  forEach(events, (callback, event) =>
-    el.addEventListener(event, callback));
+  forEach(events, (callback, event) => el.addEventListener(event, callback));
 
 const createTag = tag => (attrs = {}, events = {}) => {
   const $element = document.createElement(tag);

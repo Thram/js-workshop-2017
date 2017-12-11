@@ -24,6 +24,4 @@ export const button = createTag('button');
 export const label = createTag('label');
 export const span = createTag('span');
 
-export default {
-  div, h1, h2, img, select, option, button, label, span,
-};
+export default { div, h1, h2, img, select, option, button, label, span };
