@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "precommit": "npm run lint",
-    "commit": "git add . && git cz",
+    "cz": "git add . && git cz",
     "prebuild": "rimraf dist",
     "build": "npm run lint && NODE_ENV=production webpack -p",
     "example": "node examples/index.js",
